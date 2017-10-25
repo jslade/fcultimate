@@ -1,0 +1,15 @@
+{
+  "short_name": "fcultimate",
+  "name": "fcultimate react-based web UI",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "148x148",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

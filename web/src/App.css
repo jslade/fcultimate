@@ -1,0 +1,21 @@
+.App {
+  display: flex;
+}
+
+.App-nav {
+  flex-direction: column;
+  padding: .5em;
+  width: 8em;
+  background: #f0f0f0;
+  text-align: center;
+}
+
+.App-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.App-main {
+  flex: 1;
+  padding: 1em;
+}
