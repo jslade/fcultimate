@@ -19,3 +19,32 @@
   flex: 1;
   padding: 1em;
 }
+
+
+tr.signup .glyphicon-remove {
+  color: #a94442
+}
+
+tr.signup-in {
+  background: #dff0d8
+}
+
+tr.signup-out {
+  background: #faf2cc
+}
+
+
+
+.loader {
+  border: .8em solid #f3f3f3;
+  border-top: .8em solid #3498db;
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

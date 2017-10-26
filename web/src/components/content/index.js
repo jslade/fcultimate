@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Markdown from 'react-markdown'
 
+import API from '../../services/api'
+
 export default class Content extends Component {
   constructor () {
     super()
+    this.api = new API()
     this.state = {
       markdown: '... missing content ...'
     }
@@ -21,15 +24,13 @@ export default class Content extends Component {
     if (props.body !== undefined) {
       this.setContent(props.body)
     } else if (props.name) {
-      window.fetch(`api/contents/${props.name}`)
-        .then(response => response.json())
-        .then(json => this.handleResponse(json))
-        .catch(error => console.log(error))
+      this.api.GET({ path: `contents/${props.name}` })
+        .then((json) => this.handleResponse(json))
     }
   }
 
   handleResponse = (json) => {
-    this.setContent(json.body)
+    this.setContent(json ? json.body : {})
   }
 
   setContent = (body) => {

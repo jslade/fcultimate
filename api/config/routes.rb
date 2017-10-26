@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :games, only: [:index, :show]
+    resources :signups, only: [:create, :update, :destroy]
 
     get 'contents/:name', to: 'contents#show', constraints: { name: %r{[^/?]+} }
   end

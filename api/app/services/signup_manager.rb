@@ -12,28 +12,35 @@ class SignupManager
     player = find_player_by_name(player_name, options)
     signup = create_or_update_signup(player, team_size, options)
 
-    update_status unless options[:update_stauts] == false
+    update_status unless options[:update_status] == false
 
     signup
+  end
+
+  def remove_player(signup, options={})
+    signup.delete
+
+    update_status unless options[:update_status] == false
   end
 
   def update_status
     purge_old_signups
 
     if game.signups.empty?
+      curr_team_size = 0
       new_status = game.is_game_day? ? Game::NOBODY : Game::NOT_GAME_DAY
     else
-      max_team_size = find_max_team_size
-      new_status = if max_team_size < game.min_team_size
+      curr_team_size = find_curr_team_size
+      new_status = if curr_team_size < game.min_team_size
         Game::TOO_FEW
-      elsif game.signups.size > max_team_size * 2
-        Game::EXTRA
+      #elsif game.signups.size > max_team_size * 2 + 2
+      #  Game::EXTRA
       else
         Game::ENOUGH
       end
     end
 
-    game.update status: new_status
+    game.update status: new_status, curr_team_size: curr_team_size
   end
 
   def purge_old_signups
@@ -54,12 +61,16 @@ class SignupManager
       game.signups << signup
     end
 
-    signup.update team_size: team_size
+    attrs = {
+      team_size: team_size,
+      comment: options[:comment]
+    }
+    signup.update attrs
 
     signup
   end
 
-  def find_max_team_size
+  def find_curr_team_size
     bucketize_signups.each_with_index.map do |count, team_size|
       count >= team_size*2 ? team_size : 0
     end.max
