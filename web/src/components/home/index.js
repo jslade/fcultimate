@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 
 import Content from '../content'
+import MainLayout from '../main-layout'
 
 class Home extends Component {
   render () {
     return (
-      <Content name={'home'} />
+      <MainLayout>
+        <Content name={'home'} />
+      </MainLayout>
     )
   }
 }

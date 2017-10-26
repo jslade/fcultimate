@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import MainLayout from '../main-layout'
+
 import GameAbout from './game-about'
 import GameStatus from './game-status'
 import SignupForm from './signup-form'
@@ -67,10 +69,14 @@ class Game extends Component {
     const { game } = this.state
     if (!game) {
       return this.renderNoGame()
+    } else {
+      return this.renderGame(game)
     }
+  }
 
+  renderGame (game) {
     return (
-      <div>
+      <MainLayout sidebar={<GameAbout game={game} />}>
         <h1>{game.brief}</h1>
         <GameStatus game={game} />
         <SignupTable game={game}
@@ -78,9 +84,7 @@ class Game extends Component {
         <h2>Jump into the game</h2>
         <SignupForm game={game}
                     onSubmit={this.onSubmit} />
-        <h2>Details</h2>
-        <GameAbout game={game} />
-      </div>
+      </MainLayout>
     )
   }
 

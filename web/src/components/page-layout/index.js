@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid, Row } from 'react-bootstrap'
 
 import Nav from '../nav'
 
-class PageLayout extends Component {
-
+export default class PageLayout extends Component {
   render () {
     return (
       <Grid>
@@ -12,20 +11,9 @@ class PageLayout extends Component {
           <Nav />
         </Row>
         <Row>
-          <Col md={9} xs={10}>
-            {this.props.children}
-          </Col>
-          <Col md={3} sm={2}>
-            <Sidebar />
-          </Col>
+          {this.props.children}
         </Row>
       </Grid>
     )
   }
 }
-
-const Sidebar = () => (
-  <div>Sidebar test</div>
-)
-
-export default PageLayout

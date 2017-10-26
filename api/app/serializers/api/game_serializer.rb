@@ -10,7 +10,10 @@ module Api
       :min_team_size,
       :curr_team_size,
       :signups,
-      :status
+      :status,
+      :notify_address,
+      :subscribe_url,
+      :unsubscribe_url
 
     def signups
       object.sorted_signups.map do |su|
