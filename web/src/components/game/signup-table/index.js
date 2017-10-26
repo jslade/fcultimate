@@ -8,7 +8,7 @@ class SignupTable extends Component {
   }
 
   render () {
-    if (!this.props.game.signups || this.props.game.signups.length == 0) {
+    if (!this.props.game.signups || this.props.game.signups.length === 0) {
       return ( <div /> )
     }
 

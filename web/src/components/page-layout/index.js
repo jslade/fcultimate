@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 import Nav from '../nav'
 
@@ -6,19 +7,19 @@ class PageLayout extends Component {
 
   render () {
     return (
-      <div className='container'>
-        <div className='row'>
+      <Grid>
+        <Row>
           <Nav />
-        </div>
-        <div className='row'>
-          <div className='col-sm'>
+        </Row>
+        <Row>
+          <Col md={9} xs={10}>
             {this.props.children}
-          </div>
-          <div className='col-sm'>
+          </Col>
+          <Col md={3} sm={2}>
             <Sidebar />
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }
