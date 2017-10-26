@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import About from '../components/about'
 import Contact from '../components/contact'
 import Game from '../components/game'
 import Home from '../components/home'
@@ -13,6 +14,7 @@ export default function router () {
         <Route exact path='/' component={Home} />
         <Switch>
           <Route path='/contact' component={Contact} />
+          <Route path='/about' component={About} />
           <Route path='/:name' component={Game} />
         </Switch>
       </PageLayout>

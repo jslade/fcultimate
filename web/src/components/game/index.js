@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import GameAbout from '../game-about'
-import GameStatus from '../game-status'
-import SignupForm from '../signup-form'
-import SignupTable from '../signup-table'
+import GameAbout from './game-about'
+import GameStatus from './game-status'
+import SignupForm from './signup-form'
+import SignupTable from './signup-table'
 
 import API from '../../services/api'
 

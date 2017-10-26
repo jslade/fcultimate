@@ -10,6 +10,7 @@ ActiveAdmin.register Game do
     :location,
     :name,
     :min_team_size,
+    :max_team_size,
     :notify_address,
     :signup_time,
     :subscribe_url,
