@@ -1,10 +1,20 @@
 # fcultimate
 
+## What
+
+Provides a website for managing pickup ultimate (and other sports) games. The basic idea is: people go to the website in the morning before the game to sign up and say they're ready to play. Prior to the game, the site sends out an email to the accompanying mailing list whether the game is on (enough people signed up) or not.
+
+This is used primarily for a twice-weekly pickup game at the HP campus in Fort Collins, CO, a game that has been running continuously for over twenty years. This is now the third iteration of the signup website.
+
+## Why
+
 This app was built for [fcultimate.net](http://fcultimate.net), replacing an old
 version based on rails 2, last updated in 2009. The goal with the remake was
 to use some newer technologies, focusing more on the UI, and also to build it
 such that it could potentially be used as a white-label product to let other
-people embed the signup functonality into their own websites. More on that later...
+people embed the signup functonality into their own websites.
+
+To that end, it is split into an API backend in Rails, and a (for now at least) a web frontend using React. The backend is totally site-agnostic and could easily be repurposed for someone with similar needs
 
 ## api/
 
