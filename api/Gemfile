@@ -32,6 +32,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# react_on_rails to generate react-based UIs
+gem 'react_on_rails', '~> 10.0.1'
+
 # ActiveAdmin
 gem 'devise', '> 4.x'
 gem 'activeadmin', github: 'activeadmin'
@@ -40,8 +43,8 @@ gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resour
 # Misc
 gem 'active_model_serializers'
 gem 'awesome_print'
+gem 'mini_racer', platforms: :ruby
 gem 'paul_bunyan'
-gem 'react_on_rails'
 gem 'responders'
 
 group :development, :test do

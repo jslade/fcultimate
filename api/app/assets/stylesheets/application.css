@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+.remove {
+  color: #a94442
+}
+
+.remove :hover {
+  background-color: #f2dede
+}
+
+.signup_in {
+  background: #dff0d8
+}
+
+.signup_out {
+  background: #faf2cc
+}
