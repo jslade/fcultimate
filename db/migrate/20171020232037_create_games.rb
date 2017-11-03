@@ -5,9 +5,9 @@ class CreateGames < ActiveRecord::Migration[5.1]
       t.timestamps
 
       t.string :name, unique: true
-      t.text :brief
-      t.text :description, default: ''
-      t.text :location, default: ''
+      t.string :brief
+      t.text :description
+      t.text :location
 
       t.string :game_days
       t.string :game_day_time
@@ -21,8 +21,8 @@ class CreateGames < ActiveRecord::Migration[5.1]
       t.integer :status, default: 0
 
       t.string :notify_address
-      t.text :subscribe_url
-      t.text :unsubscribe_url
+      t.string :subscribe_url
+      t.string :unsubscribe_url
     end
   end
 end
