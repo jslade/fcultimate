@@ -19,5 +19,8 @@
   "cacheDirectories": [
     "node_modules",
     "client/node_modules"
-  ]
+  ],
+  "scripts": {
+    "postinstall": "cd client && npm install"
+  }
 }

@@ -59,7 +59,7 @@ user must be seeded manually...
 
 ### fcultimate.net
 
-`fcultimate.net` is hosted by [Dreamhost](dreamhost.com) on a shared-hosting plan. They only sort-of support rails running like this (more or less discouraged, but it's possible), and features are limited -- not postgres, for example. So production deployment is done with mysql.
+`fcultimate.net` is hosted by [Heroku](heroku.com) on a free-dev plan. The
 
 
 ## White-label / Embedding
