@@ -24,5 +24,9 @@ module Api
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # Disable the assets pipeline / sprockets, since all UI stuff will be
+    # handled via the react web UI
+    config.assets.enabed = false
   end
 end
