@@ -90,4 +90,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.secret_key = ENV['SECRET_KEY_BASE']
+  config.build_production_command = nil # Disable assets:precompile
 end
