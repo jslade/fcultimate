@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './styles.css'
+
 export default class SignupTable extends Component {
   handleRemove = (signup) => {
     console.log(`wimpout: ${JSON.stringify(signup)}`)

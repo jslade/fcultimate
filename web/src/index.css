@@ -1,5 +1,7 @@
-.App {
-  display: flex;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
 .loader {
@@ -8,10 +10,10 @@
   border-radius: 50%;
   width: 4em;
   height: 4em;
-  animation: loader 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
 }
 
-@keyframes loader {
+@keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }

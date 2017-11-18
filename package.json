@@ -1,26 +1,11 @@
 {
-  "name": "fcultimate-client",
-  "private": true,
-  "dependencies": {
-    "@rails/webpacker": "^3.0.2",
-    "babel-preset-react": "^6.24.1",
-    "coffeescript": "1.12.7",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-bootstrap": "^0.31.5",
-    "react-dom": "^16.0.0",
-    "react-markdown": "^2.5.0",
-    "react-on-rails": "^10.0.1",
-    "react-router-dom": "^4.2.2"
+  "name": "fcultimate",
+  "engines": {
+    "node": "6.3.1"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^2.9.3"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ],
   "scripts": {
-    "postinstall": "yarn install"
+    "build": "cd web && yarn install && yarn build && cd ..",
+    "deploy": "cp -a web/build/. api/public/",
+    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
   }
 }
