@@ -1,4 +1,5 @@
-{
+{ "//": "This file is specifically to support deploying on heroku",
+  "//": "It is used by the official heroku/nodejs buildpack",
   "name": "fcultimate",
   "engines": {
     "node": "6.3.1"
