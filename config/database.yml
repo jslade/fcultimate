@@ -19,8 +19,3 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
-
-# Production deployment is intended to be run on heroku,
-# with a database provisioned via
-# heroku addons:create heroku-postgresql:hobby-dev
-production: <%= ENV['DATABASE_URL'] %>
