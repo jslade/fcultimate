@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   # to serving the root index.html, which will mean that url is handled
   # by react-router on the frontend
   def fallback
-    render file: 'public/index.html'
+    render file: 'public/index.html', layout: false
   end
 end
