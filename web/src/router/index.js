@@ -13,7 +13,7 @@ export default function router () {
       <PageLayout>
         <Route exact path='/' component={Home} />
         <Switch>
-          <Route exact path='/contact' main={Contact} />
+          <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
           <Route exact path='/:name' component={Game} />
 
