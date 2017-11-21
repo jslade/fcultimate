@@ -1,2 +1,2 @@
 api: bin/rails s -p 3001
-web: cd web && yarn start
+web: bash -c 'cd web && yarn start'
