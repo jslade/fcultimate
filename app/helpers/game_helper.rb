@@ -7,7 +7,7 @@ module GameHelper
     # as the game doesn't have routes. The url must correspond to the
     # routes recognized by the React router frontend
     base_url = "http://#{ENV['MAILER_HOST']}"
-    "#{base_url}/#{game.name}" + (action ? "/#{action}" : '')
+    "#{base_url}/#{game.name}" + (action.present? ? "/#{action}" : '')
   end
 
   def players(game)
