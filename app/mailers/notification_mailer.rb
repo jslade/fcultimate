@@ -24,6 +24,11 @@ class NotificationMailer < ApplicationMailer
 
   def init_mail(game, subj)
     @game = game
-    mail(to: game.notify_address, subject: subj)
+
+    # Workaround -- action_name is evaluating to nil for some reason,
+    # so provide an explicit template_name instead
+    template_name = caller(1..1).first[/`.*'/][1..-2]
+
+    mail(to: game.notify_address, subject: subj, template_name: template_name)
   end
 end
