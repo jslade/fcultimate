@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContentsController < ApiController
   def show
     content = Content.find_by(name: params[:name])

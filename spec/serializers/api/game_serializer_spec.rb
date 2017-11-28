@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::GameSerializer do
   let(:game) { create :game }
 
@@ -10,7 +12,14 @@ RSpec.describe Api::GameSerializer do
         id: game.id,
         location: game.location,
         name: game.name,
-        status: game.status
+        status: game.status,
+        min_team_size: game.min_team_size,
+        max_team_size: game.max_team_size,
+        curr_team_size: game.curr_team_size,
+        signups: [],
+        notify_address: game.notify_address,
+        subscribe_url: game.subscribe_url,
+        unsubscribe_url: game.unsubscribe_url
       )
     end
   end

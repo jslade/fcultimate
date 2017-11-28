@@ -1,0 +1,5 @@
+<%= render :partial => 'players' if @game.signups.size > 0 %>
+
+To signup: <%= game_url(@game, :signup) %>
+
+To remove yourself from this list: <%= game_url(@game, :unsubscribe) %>

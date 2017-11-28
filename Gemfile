@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 ruby '2.4.1'
 
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -21,8 +22,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # ActiveAdmin
-gem 'devise', '> 4.x'
 gem 'activeadmin', github: 'activeadmin'
+gem 'devise', '> 4.x'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 
 # Misc
@@ -36,19 +37,21 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  gem 'guard-rspec'
   gem 'pry'
   gem 'rspec-rails'
+  gem 'rubocop'
   gem 'selenium-webdriver'
 end
 
 group :development do
   gem 'foreman'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -58,9 +61,9 @@ group :test do
   gem 'factory_bot_rails'
   gem 'once-ler'
   gem 'rspec-its'
-  gem 'rubocop'
   gem 'shoulda'
   gem 'simplecov'
+  gem 'timecop'
 end
 
 group :production do
@@ -68,4 +71,4 @@ group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

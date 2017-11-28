@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Signup < ApplicationRecord
   belongs_to :game
   belongs_to :player
@@ -14,7 +16,7 @@ class Signup < ApplicationRecord
     if team_size > 0
       "#{team_size} v #{team_size}"
     else
-      "any"
+      'any'
     end
   end
 end

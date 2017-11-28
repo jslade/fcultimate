@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::ContentSerializer do
   let(:content) { create :content }
 

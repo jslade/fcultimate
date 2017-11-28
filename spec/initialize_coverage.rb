@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if ENV['COVERAGE'] == '1'
   puts 'Code Coverage Enabled'
   begin

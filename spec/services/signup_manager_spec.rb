@@ -27,7 +27,7 @@ RSpec.describe SignupManager, type: :service do
       it 'notices extras' do
         3.times { |p| mgr.add_player "p3-#{p}", 3 }
         4.times { |p| mgr.add_player "p4-#{p}", 4 }
-        10.times { |p| mgr.add_player "p5-#{p}", 5 }
+        20.times { |p| mgr.add_player "p5-#{p}", 5 }
         expect(game.status).to eq Game::EXTRA
       end
     end

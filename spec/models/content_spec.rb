@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Content, type: :model do
   describe 'attributes' do
     its(:attributes) { should include 'name' }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Signup, type: :model do
   describe 'attributes' do
     its(:attributes) { should include 'team_size' }

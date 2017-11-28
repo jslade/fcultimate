@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Game < ApplicationRecord
-  def game_day?(time=Time.now)
+  def game_day?(time = Time.now)
     if normal_game_day?(time)
       !non_game_exception?(time)
     else
@@ -7,16 +9,16 @@ class Game < ApplicationRecord
     end
   end
 
-  def normal_game_day?(time=Time.now)
+  def normal_game_day?(time = Time.now)
     today = Time::RFC2822_DAY_NAME[time.wday]
-    ((game_days || '') =~ /#{today}/) ? true : false
+    (game_days || '') =~ /#{today}/ ? true : false
   end
 
-  def non_game_exception?(time=Time.now)
+  def non_game_exception?(_time = Time.now)
     nil
   end
 
-  def extra_game_exception?(time=Time.now)
+  def extra_game_exception?(_time = Time.now)
     nil
   end
 end

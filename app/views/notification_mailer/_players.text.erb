@@ -1,0 +1,5 @@
+Players:
+
+<% @game.sorted_signups.each do |su| -%>
+<%= "%-10s%s" % [ su.team_size_label, su.player.name ] %>
+<% end -%>

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SignupsController < ApiController
-  protect_from_forgery except: [:create, :update]
+  protect_from_forgery except: %i[create update]
 
   def create
     game = Game.find(params[:game_id])

@@ -1,0 +1,51 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "globalReturn": true,
+      "jsx": true,
+      "modules": true
+    },
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": false,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "document": false,
+    "escape": false,
+    "fetch": false,
+    "navigator": false,
+    "unescape": false,
+    "window": false,
+    "HTMLElement": false,
+    "SVGElement": true,
+    "Event": false
+  },
+  "rules": {
+    "mocha/no-exclusive-tests": 2,
+    "jsx-a11y/href-no-hash": "off",
+    "react/prop-types": 0,
+    "react/no-deprecated": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": false,
+        "bracketSpacing": true,
+        "singleQuote": true
+      }
+    ]
+  },
+  "plugins": [
+    "react",
+    "mocha",
+    "class-property",
+    "prettier"
+  ],
+  "extends": [
+    "react-app"
+  ]
+}

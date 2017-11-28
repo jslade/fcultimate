@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GamesController < ApiController
   def index
     scope = Game.all
@@ -5,11 +7,11 @@ class GamesController < ApiController
   end
 
   def show
-    if params[:id] =~ /\A\d+\z/
-      game = Game.find(params[:id])
-    else
-      game = Game.find_by(name: params[:id])
-    end
+    game = if params[:id] =~ /\A\d+\z/
+             Game.find(params[:id])
+           else
+             Game.find_by(name: params[:id])
+           end
 
     respond_with game, serializer: Api::GameSerializer
   end

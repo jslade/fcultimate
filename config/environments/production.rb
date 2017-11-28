@@ -90,4 +90,19 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.secret_key = ENV['SECRET_KEY_BASE']
+
+  # TODO: This is intended for using the sendgrid addon when deployed to Heroku.
+  # This should be generalized at some point to work for other deployments
+  if ENV['SENDGRID_USERNAME']
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.smtp_settings = {
+      :user_name => ENV['SENDGRID_USERNAME'],
+      :password => ENV['SENDGRID_PASSWORD'],
+      :domain => ENV['MAIL_HOST'],
+      :address => ENV['SENDGRID_ADDRESS'],
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
 end

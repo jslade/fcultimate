@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApiController < ApplicationController
   responders :json
   respond_to :json
