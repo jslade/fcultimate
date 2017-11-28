@@ -31,3 +31,5 @@ spec/examples.txt
 /public/static
 /public/packs-test
 /node_modules
+
+notes.md
