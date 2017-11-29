@@ -1,5 +1,5 @@
 RSpec.describe NotificationMailer, type: :service do
-  let(:game) { create :game, name: 'mailer_test' }
+  let(:game) { create :game, name: 'spec', notify_address: 'dummy@example.com' }
 
   def deliver(action)
     NotificationMailer.new.send(action, game).deliver

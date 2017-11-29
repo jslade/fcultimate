@@ -17,20 +17,20 @@ class NotificationManager
 
   def notify_final_game_status
     notify_if_time_arrived :game_status, game.email_time do
-      mailer.game_on(game).deliver if game.on?
-      mailer.game_off(game).deliver if game.need_more?
+      mailer.game_on(game)&.deliver if game.on?
+      mailer.game_off(game)&.deliver if game.need_more?
     end
   end
 
   def notify_early_game_status
     notify_if_time_arrived :need_more, game.early_email_time do
-      mailer.need_more(game).deliver if game.need_more?
+      mailer.need_more(game)&.deliver if game.need_more?
     end
   end
 
   def notify_game_day
     notify_if_time_arrived :game_day, game.game_day_time do
-      mailer.game_day(game).deliver if game.game_day?
+      mailer.game_day(game)&.deliver if game.game_day?
     end
   end
 
