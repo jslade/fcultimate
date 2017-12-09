@@ -25,7 +25,7 @@ RSpec.describe NotificationManager, type: :service do
   end
 
   def expect_notification(what)
-    now = Time.now
+    now = Time.zone.now
     yield
     n = Notification.find_by!(game_id: game.id, what: what)
     expect(n.sent_at >= now).to be_truthy

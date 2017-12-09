@@ -8,6 +8,10 @@ require 'initialize_coverage'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
+require 'webmock/rspec'
+
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 # Checks for pending migrations and applies them before tests are run.
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -90,6 +94,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 
+  config.infer_spec_type_from_file_location!
+
   # Filter lines from Rails gems in backtraces
   # arbitrary gems may also be filtered with:
   # config.filter_gems_from_backtrace 'gem_name'
@@ -98,4 +104,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.include FactoryBot::Syntax::Methods
+  config.include ControllerMacros, type: :controller
 end

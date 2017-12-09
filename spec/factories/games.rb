@@ -7,5 +7,6 @@ FactoryBot.define do
     location 'some park'
     game_time '12:00'
     min_team_size 3
+    timezone 'US/Mountain'
   end
 end

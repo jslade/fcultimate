@@ -64,6 +64,7 @@ group :test do
   gem 'shoulda'
   gem 'simplecov'
   gem 'timecop'
+  gem 'webmock'
 end
 
 group :production do

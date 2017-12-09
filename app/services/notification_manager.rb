@@ -8,12 +8,18 @@ class NotificationManager
   end
 
   def send_next_notification
+    Time.use_zone(game.timezone) do
+      send_next_notification_localtime
+    end
+  end
+
+  private
+
+  def send_next_notification_localtime
     notify_final_game_status ||
       notify_early_game_status ||
       notify_game_day
   end
-
-  private
 
   def notify_final_game_status
     notify_if_time_arrived :game_status, game.email_time do
@@ -39,7 +45,7 @@ class NotificationManager
     # notifications, so consider it as sent
     return true unless notify_time
 
-    now = Time.now
+    now = Time.zone.now
     if now >= notify_time.to_time
       unless already_sent_notification what, notify_time
         yield

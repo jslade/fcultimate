@@ -7,6 +7,7 @@ RSpec.describe Game, type: :model do
     its(:attributes) { should include 'name' }
     its(:attributes) { should include 'description' }
     its(:attributes) { should include 'brief' }
+    its(:attributes) { should include 'timezone' }
   end
 
   it 'includes gameday methods' do

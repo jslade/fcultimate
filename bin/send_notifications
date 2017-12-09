@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+# frozen_string_literal: true
+
+require File.expand_path(File.dirname(__FILE__) + '/../config/environment')
 
 Game.order(:id).each do |game|
+  SignupManager.new(game).update_status
   NotificationManager.new(game).send_next_notification
 end

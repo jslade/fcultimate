@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122231031) do
+ActiveRecord::Schema.define(version: 20171209042907) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20171122231031) do
     t.text "unsubscribe_url"
     t.integer "max_team_size", default: 7
     t.integer "curr_team_size", default: 0
+    t.string "timezone"
   end
 
   create_table "notifications", force: :cascade do |t|

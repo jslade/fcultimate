@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class SignupsController < ApiController
+  include Concerns::WithGame
+
   protect_from_forgery except: %i[create update]
 
   def create
-    game = Game.find(params[:game_id])
     mgr = SignupManager.new(game)
 
     mgr.add_player(
@@ -17,7 +18,6 @@ class SignupsController < ApiController
   end
 
   def update
-    game = Game.find(params[:game_id])
     mgr = SignupManager.new(game)
 
     signup = Signup.find(params[:id])
