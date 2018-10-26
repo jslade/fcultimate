@@ -32,6 +32,7 @@ gem 'active_model_serializers'
 gem 'awesome_print'
 gem 'mini_racer', platforms: :ruby
 gem 'responders'
+gem 'scout_apm'
 gem 'traceable'
 
 # Sprockets -- need this specific version for security vulnerability
