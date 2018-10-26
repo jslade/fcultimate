@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class SignupManager
+  include Traceable
+
   attr_reader :game
 
   def initialize(game)
     @game = game
+    trace "SignupManager for game=#{game.name}"
   end
 
   def add_player(player_name, team_size, options = {})
@@ -20,6 +23,7 @@ class SignupManager
   end
 
   def remove_player(signup, options = {})
+    trace "Remove player signup id=#{signup.id}, name=#{signup.player.name}"
     signup.delete
 
     update_status unless options[:update_status] == false
@@ -40,7 +44,7 @@ class SignupManager
   end
 
   def purge_old_signups
-    Signup.where('updated_at < ?', Date.today).delete_all
+    Signup.where('game_id = ? AND updated_at < ?', game.id, Date.today).delete_all
   end
 
   private

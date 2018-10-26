@@ -30,8 +30,8 @@ gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resour
 gem 'active_model_serializers'
 gem 'awesome_print'
 gem 'mini_racer', platforms: :ruby
-gem 'paul_bunyan'
 gem 'responders'
+gem 'traceable'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

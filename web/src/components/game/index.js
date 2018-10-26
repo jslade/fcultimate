@@ -1,69 +1,81 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom'
 
-import MainLayout from '../main-layout'
-
-import GameAbout from './game-about'
-import GameStatus from './game-status'
-import SignupForm from './signup-form'
-import SignupTable from './signup-table'
+import GameLayout from './game-layout'
+import GameSubscribe from './subscription'
+import GameUnsubscribe from './unsubscription'
 
 import API from '../../services/api'
 
 export default class Game extends Component {
-  constructor () {
+  constructor() {
     super()
-    this.api = new API()
     this.state = {
+      api: new API(),
       loaded: false,
       game: {}
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.loadGame()
   }
 
   loadGame = () => {
     const { match } = this.props
-    this.api.GET({ path: `games/${match.params.name}` })
+    this.state.api
+      .GET({ path: `games/${match.params.name}` })
       .then(json => this.handleResponse(json))
   }
 
-  handleResponse = (json) => {
+  handleResponse = json => {
     this.setState({ loaded: true, game: json })
   }
 
-  onSubmit = (signup) => {
-    this.api.POST({
-      path: `signups`,
-      body: Object.assign({
-        game_id: this.state.game.id
-      }, signup)
-    }).then(json => this.handleResponse(json))
+  onSubmit = signup => {
+    this.state.api
+      .POST({
+        path: `games/${this.state.game.id}/signups`,
+        body: signup
+      })
+      .then(json => this.handleResponse(json))
   }
 
-  onUpdate = (signup) => {
-    this.api.PUT({
-      path: `signups/${signup.id}`,
-      body: Object.assign({
-        game_id: this.state.game.id
-      }, signup)
-    }).then(json => this.handleResponse(json))
+  onUpdate = signup => {
+    this.state.api
+      .PUT({
+        path: `games/${this.state.game.id}/signups/${signup.id}`,
+        body: signup
+      })
+      .then(json => this.handleResponse(json))
   }
 
-  onRemove = (signup) => {
-    this.api.DELETE({
-      path: `signups/${signup.id}`,
-      query: { game_id: this.state.game.id }
-    }).then(this.loadGame)
+  onRemove = signup => {
+    this.state.api
+      .DELETE({
+        path: `games/${this.state.game.id}/signups/${signup.id}`
+      })
+      .then(this.loadGame)
   }
 
-  render () {
+  onSubscribe = subscribe => {
+    this.state.api
+      .POST({
+        path: `games/${this.state.game.id}/subscriptions`,
+        body: subscribe
+      })
+      .then(this.loadGame)
+  }
+
+  render() {
     if (!this.state.loaded) {
-      return (
-        <div className='loader' />
-      )
+      return <div className="loader" />
     }
 
     const { game } = this.state
@@ -74,17 +86,40 @@ export default class Game extends Component {
     }
   }
 
-  renderGame (game) {
+  renderGame(game) {
+    const gameProps = {
+      game: game,
+      onSubmit: this.onSubmit,
+      onUpdate: this.onUpdate,
+      onRemove: this.onRemove,
+      onSubscribe: this.onSubscribe
+    }
+
     return (
-      <MainLayout sidebar={<GameAbout game={game} />}>
-        <h1>{game.brief}</h1>
-        <GameStatus game={game} />
-        <h2>Jump into the game</h2>
-        <SignupForm game={game}
-                    onSubmit={this.onSubmit} />
-        <SignupTable game={game}
-                     onUpdate={this.onUpdate} onRemove={this.onRemove} />
-      </MainLayout>
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/:name"
+            render={props => <GameLayout {...gameProps} {...props} />}
+          />
+          <Route
+            path="/:name/subscribe"
+            render={props => <GameSubscribe {...gameProps} {...props} />}
+          />
+          <Route
+            path="/:name/unsubscribe"
+            render={props => <GameUnsubscribe {...gameProps} {...props} />}
+          />
+
+          <Route
+            path="/:name"
+            render={({ match }) => {
+              return <Redirect to={`/${match.params.name}`} />
+            }}
+          />
+        </Switch>
+      </Router>
     )
   }
 
@@ -92,10 +127,17 @@ export default class Game extends Component {
     const { match } = this.props
 
     return (
-      <div className='alert alert-danger'>
-        <h1 className='alert-heading'>Game not found</h1>
-        <p>Something went wrong... no game named '<code>{match.params.name}</code>' ?!?</p>
-        <p><Link to="/contact">Contact</Link> the administrators if you believe this is an error.</p>
+      <div className="alert alert-danger">
+        <h1 className="alert-heading">Game not found</h1>
+        <p>
+          Something went wrong... no game named '<code>
+            {match.params.name}
+          </code>' ?!?
+        </p>
+        <p>
+          <Link to="/contact">Contact</Link> the administrators if you believe
+          this is an error.
+        </p>
       </div>
     )
   }

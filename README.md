@@ -24,7 +24,7 @@ To that end, it is split into an API backend in Rails, and a (for now at least)
 a web frontend using React. The backend is totally site-agnostic and could
 easily be repurposed for someone with similar needs
 
-## api/
+## main app (api / backend)
 
 ### Rails
 
@@ -35,8 +35,7 @@ Initially setup following
 though I ended up deviating from it a lot. I should go back and see if I can get
 ActiveAdmin to work now with an API-only rails setup? Or how to clean up all the
 extra cruft I got by doing `rails new --webpack`. But having `ActiveAdmin` for
-the admin side (creating content blocks and game definitions) is definitely
-notice
+the admin side (creating content blocks and game definitions) is definitely nice
 
 ### Defining Games
 

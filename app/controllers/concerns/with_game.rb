@@ -3,21 +3,22 @@
 module Concerns
   module WithGame
     extend ActiveSupport::Concern
+    include Traceable
 
     included do
       around_action :with_timezone
     end
 
     def game
-      @_game ||= find_game(params[:game_id] || params[:id])
+      @game ||= find_game(params[:game_id] || params[:id])
     end
 
+    private
+
     def find_game(id)
-      if id =~ /\A\d+\z/
-        Game.find(id)
-      else
-        Game.find_by(name: id)
-      end
+      trace "#{self.class.name} find_game id=#{id}"
+      return Game.find(id) if id =~ /\A\d+\z/
+      Game.find_by(name: id)
     end
 
     def with_timezone(&block)

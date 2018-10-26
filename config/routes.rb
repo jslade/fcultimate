@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope '/api' do
-    resources :games, only: [:index, :show]
-    resources :signups, only: [:create, :update, :destroy]
+    resources :games, only: [:index, :show] do
+      resources :signups, only: [:create, :update, :destroy]
+      resources :subscriptions, only: [:create]
+    end
 
     get 'contents/:name', to: 'contents#show', constraints: { name: %r{[^/?]+} }
   end

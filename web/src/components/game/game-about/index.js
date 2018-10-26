@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import Content from '../../content'
 
 export default class GameAbout extends Component {
-  render () {
+  render() {
     return (
       <div>
         <h3>Details</h3>
@@ -13,21 +14,50 @@ export default class GameAbout extends Component {
     )
   }
 
-  renderMailingList () {
+  renderMailingList() {
     const { game } = this.props
 
     if (!game.notify_address) {
-      return (<div />)
+      return <div />
     }
+
+    const subscribeLink = this.renderSubscribeLink()
+    const unsubscribeLink = this.renderUnsubscribeLink()
 
     return (
       <div>
         <h3>Mailing List</h3>
         <a href={`mailto:${game.notify_address}`}>Send a message to the list</a>
-        <br/>
-        <a href={game.subscribe_url}>Subscribe to the list</a>
-        <br/>
-        <a href={game.unsubscribe_url}>Unsubscribe from the list</a>
+        {subscribeLink}
+        {unsubscribeLink}
+      </div>
+    )
+  }
+
+  renderSubscribeLink() {
+    const { game } = this.props
+
+    if (!game.subscribe_url) {
+      return <div />
+    }
+
+    return (
+      <div>
+        <Link to={`/${game.name}/subscribe`}>Subscribe to the list</Link>
+      </div>
+    )
+  }
+
+  renderUnsubscribeLink() {
+    const { game } = this.props
+
+    if (!game.unsubscribe_url) {
+      return <div />
+    }
+
+    return (
+      <div>
+        <Link to={`/${game.name}/unsubscribe`}>Unsubscribe from the list</Link>
       </div>
     )
   }

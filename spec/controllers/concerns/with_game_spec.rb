@@ -9,7 +9,9 @@ RSpec.describe Concerns::WithGame do
     end
   end
 
-  before :each { get :index, params: { game_id: game.id } }
+  before :each do
+    get :index, params: { game_id: game.id }
+  end
 
   context 'with a game_id' do
     it 'sets the current game' do
