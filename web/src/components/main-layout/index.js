@@ -29,7 +29,7 @@ export default class MainLayout extends Component {
 
   renderWithoutSidebar () {
     return (
-      <Col>
+      <Col md={8} xs={9}>
         {this.props.children}
       </Col>
     )
