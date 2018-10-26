@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import {
+  Glyphicon,
+  Table
+} from 'react-bootstrap'
 
 import './styles.css'
 
@@ -14,7 +18,7 @@ export default class SignupTable extends Component {
     }
 
     return (
-      <table className="table table-hover table-inverse signups">
+      <Table striped bordered condensed hover className="signups">
         <thead className="thead thead-inverse">
           <tr>
             <th>Team size</th>
@@ -23,7 +27,7 @@ export default class SignupTable extends Component {
           </tr>
         </thead>
         <tbody>{this.renderRows()}</tbody>
-      </table>
+      </Table>
     )
   }
 
@@ -67,10 +71,9 @@ export default class SignupTable extends Component {
 
   renderDelete(signup) {
     return (
-      <span
-        className={`glyphicon glyphicon-remove remove`}
-        onClick={e => this.handleRemove(signup)}
-      />
+      <span className="remove">
+        <Glyphicon glyph="remove" onClick={e => this.handleRemove(signup)} />
+      </span>
     )
   }
 }

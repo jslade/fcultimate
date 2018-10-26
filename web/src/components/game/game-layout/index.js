@@ -14,13 +14,13 @@ export default class GameLayout extends Component {
       <MainLayout sidebar={<GameAbout game={game} />}>
         <h1>{game.brief}</h1>
         <GameStatus game={game} />
-        <h2>Jump into the game</h2>
-        <SignupForm game={game} onSubmit={this.props.onSubmit} />
         <SignupTable
           game={game}
           onUpdate={this.props.onUpdate}
           onRemove={this.props.onRemove}
         />
+        <h3>Jump into the game</h3>
+        <SignupForm game={game} onSubmit={this.props.onSubmit} />
       </MainLayout>
     )
   }

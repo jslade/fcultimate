@@ -1,4 +1,11 @@
 import React, { Component } from 'react'
+import {
+  Button,
+  ControlLabel,
+  FormControl,
+  FormGroup,
+  HelpBlock
+} from 'react-bootstrap'
 
 import './styles.css'
 
@@ -14,7 +21,7 @@ export default class SignupForm extends Component {
   }
 
   handleChange = e => {
-    const name = e.target.name
+    const name = e.target.id
     const value = e.target.value
     this.setState({ [name]: value })
   }
@@ -28,69 +35,32 @@ export default class SignupForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className="form-horizontal signup">
-          <div className="form-group form-group-sm">
-            <label htmlFor="name" className="col-sm-2 control-label">
-              Name
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                name="name"
-                placeholder="Name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
+        <form onSubmit={this.handleSubmit} className="signup">
+          <FieldGroup
+            id="team_size"
+            componentClass="select"
+            placeholder="Team size"
+            help="What's the smallest team size you're willing to play with?"
+            value={this.state.team_size}
+            onChange={this.handleChange}>
+              {this.renderTeamSizeOptions()}
+          </FieldGroup>
 
-          <div className="form-group form-group-sm">
-            <label htmlFor="team_size" className="col-sm-2 control-label">
-              Team size
-            </label>
-            <div className="col-sm-10">
-              <select
-                className="form-control"
-                name="team_size"
-                value={this.state.team_size}
-                onChange={this.handleChange}
-              >
-                {this.renderTeamSizeOptions()}
-              </select>
-              <small id="team_size_help" className="form-text text-muted">
-                {"What's the smallest team size you're willing to play with?"}
-              </small>
-            </div>
-          </div>
+          <FieldGroup
+            id="name"
+            type="text"
+            placeholder="Name"
+            onChange={this.handleChange}
+          />
 
-          <div className="form-group form-group-sm">
-            <label htmlFor="comment" className="col-sm-2 control-label">
-              Comment
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                name="comment"
-                placeholder="Comment"
-                value={this.state.comment}
-                onChange={this.handleChange}
-              />
-              <small id="comment_help" className="form-text text-muted">
-                {"What's on yer mind?"}
-              </small>
-            </div>
-          </div>
+          <FieldGroup
+            id="comment"
+            type="text"
+            placeholder="Comment"
+            onChange={this.handleChange}
+          />
 
-          <div className="form-group form-group-sm">
-            <div className="col-sm-2" />
-            <div className="col-sm-10">
-              <button type="submit" className="btn btn-primary">
-                Add me
-              </button>
-            </div>
-          </div>
+          <Button type="submit">Add me</Button>
         </form>
       </div>
     )
@@ -116,3 +86,14 @@ export default class SignupForm extends Component {
     return renderedOptions
   }
 }
+
+function FieldGroup({ id, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id}>
+      {label && <ControlLabel>{label}</ControlLabel>}
+      <FormControl id={id} {...props} />
+      {help && <HelpBlock bsClass="small">{help}</HelpBlock>}
+    </FormGroup>
+  );
+}
+

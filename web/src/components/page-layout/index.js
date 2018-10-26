@@ -6,7 +6,7 @@ import Nav from '../nav'
 export default class PageLayout extends Component {
   render () {
     return (
-      <Grid>
+      <Grid fluid={true}>
         <Row>
           <Nav />
         </Row>

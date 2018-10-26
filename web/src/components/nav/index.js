@@ -9,7 +9,7 @@ export default class Nav extends Component {
   }
 
   render () {
-    // TODO: Load the specific game nav items from a contact block
+    // TODO: Load the specific game nav items from a context block
     //      to make it configurable per deployment
     return (
       <Navbar inverse collapseOnSelect>
