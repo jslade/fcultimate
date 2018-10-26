@@ -11,6 +11,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
@@ -32,6 +33,9 @@ gem 'awesome_print'
 gem 'mini_racer', platforms: :ruby
 gem 'responders'
 gem 'traceable'
+
+# Sprockets -- need this specific version for security vulnerability
+gem 'sprockets', '~> 3.7.2'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
