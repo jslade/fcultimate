@@ -43,7 +43,7 @@ class NotificationManager
   def notify_if_time_arrived(what, notify_time)
     # If no notify time, it means this game is not configured for these
     # notifications, so consider it as sent
-    return true unless notify_time
+    return true unless notify_time.present?
 
     now = Time.zone.now
     if now >= notify_time.to_time
