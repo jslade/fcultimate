@@ -7,8 +7,6 @@ import {
   HelpBlock
 } from 'react-bootstrap'
 
-import './styles.css'
-
 export default class SignupForm extends Component {
   constructor(props) {
     super(props)
@@ -42,7 +40,8 @@ export default class SignupForm extends Component {
             placeholder="Team size"
             help="What's the smallest team size you're willing to play with?"
             value={this.state.team_size}
-            onChange={this.handleChange}>
+            onChange={this.handleChange}
+          >
               {this.renderTeamSizeOptions()}
           </FieldGroup>
 
