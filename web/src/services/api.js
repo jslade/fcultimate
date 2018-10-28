@@ -42,7 +42,7 @@ export default class API {
     }
 
     const base = '/api'
-    const sub = path.startsWith('/') ? path : '/' + path
+    const sub = path.charAt(0) === '/' ? path : '/' + path
     const qstr = query ? this.queryString(query) : ''
 
     return `${base}${sub}${qstr}`
