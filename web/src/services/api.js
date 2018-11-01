@@ -26,11 +26,15 @@ export default class API {
   }
 
   request ({ method, path, body, query }) {
+    const init = {
+      cache: "no-cache"
+    }
+
     const request = new window.Request(
       this.path(path, query), this.options({ method, body})
     )
 
-    return window.fetch(request)
+    return window.fetch(request, init)
       .then(this.checkStatus(request))
       .then(this.parseJSON)
       .catch(error => this.onError(error, request))
