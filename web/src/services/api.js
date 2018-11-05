@@ -26,15 +26,11 @@ export default class API {
   }
 
   request ({ method, path, body, query }) {
-    const init = {
-      cache: "no-cache"
-    }
-
     const request = new window.Request(
       this.path(path, query), this.options({ method, body})
     )
 
-    return window.fetch(request, init)
+    return window.fetch(request)
       .then(this.checkStatus(request))
       .then(this.parseJSON)
       .catch(error => this.onError(error, request))
@@ -56,7 +52,7 @@ export default class API {
     return '?' + queryString.stringify(query, {arrayFormat: 'bracket'})
   }
 
-  options ({ method, body}) {
+  options ({ method, body }) {
     const options = { method, headers: {} }
 
     if (body) {
@@ -67,6 +63,9 @@ export default class API {
         Object.assign(options, { body: JSON.stringify(body)})
       }
     }
+
+    // At least for now, force no-cache
+    Object.assign(options.headers, { 'Cache-Control': 'no-cache' })
 
     return options
   }
