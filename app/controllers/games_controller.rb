@@ -9,6 +9,7 @@ class GamesController < ApiController
   end
 
   def show
+    expires_now
     respond_with game, serializer: Api::GameSerializer
   end
 end
