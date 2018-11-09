@@ -21,7 +21,9 @@ export default class MainLayout extends Component {
           {this.props.children}
         </Col>
         <Col md={4} sm={3}>
-          {this.props.sidebar}
+          <div style={{ float: 'right' }}>
+            {this.props.sidebar}
+          </div>
         </Col>
       </div>
     )
