@@ -18,6 +18,7 @@ RSpec.describe NotificationManager, type: :service do
     expect_any_instance_of(NotificationMailer)
       .to receive(:mail)
       .with(hash_including(subject: subject_pattern))
+      .and_call_original
   end
 
   def expect_no_email
@@ -28,7 +29,14 @@ RSpec.describe NotificationManager, type: :service do
     now = Time.zone.now
     yield
     n = Notification.find_by!(game_id: game.id, what: what)
-    expect(n.sent_at >= now).to be_truthy
+    expect(n.sent_at.present? && n.sent_at >= now).to be_truthy
+  end
+
+  def expect_no_notification(what)
+    now = Time.zone.now
+    yield
+    n = Notification.find_by(game_id: game.id, what: what)
+    expect(n.nil? || n.sent_at.nil? || n.sent_at < now).to be_truthy
   end
 
   describe 'send_next_notification' do
@@ -42,7 +50,22 @@ RSpec.describe NotificationManager, type: :service do
         Timecop.freeze('9:00'.to_time) do
           expect_notification(:game_day) { do_notify }
         end
-        Timecop.freeze('9:30'.to_time) { do_notify }
+        Timecop.freeze('9:30'.to_time) do
+          expect_no_notification(:game_day) { do_notify }
+        end
+      end
+    end
+
+    context 'today is not gameday' do
+      before do
+        allow(game).to receive(:game_day?) { false }
+      end
+
+      it 'does not send' do
+        expect_no_email
+        Timecop.freeze('9:00'.to_time) do
+          expect_no_notification(:game_day) { do_notify }
+        end
       end
     end
 
@@ -63,7 +86,9 @@ RSpec.describe NotificationManager, type: :service do
         Timecop.freeze('10:00'.to_time) do
           expect_notification(:need_more) { do_notify }
         end
-        Timecop.freeze('10:30'.to_time) { do_notify }
+        Timecop.freeze('10:30'.to_time) do
+          expect_no_notification(:need_more) { do_notify }
+        end
       end
 
       it 'sends final email once' do
@@ -71,7 +96,9 @@ RSpec.describe NotificationManager, type: :service do
         Timecop.freeze('11:00'.to_time) do
           expect_notification(:game_status) { do_notify }
         end
-        Timecop.freeze('11:30'.to_time) { do_notify }
+        Timecop.freeze('11:30'.to_time) do
+          expect_no_notification(:gate_status) { do_notify }
+        end
       end
     end
 
@@ -90,7 +117,25 @@ RSpec.describe NotificationManager, type: :service do
         Timecop.freeze('11:00'.to_time) do
           expect_notification(:game_status) { do_notify }
         end
-        Timecop.freeze('11:30'.to_time) { do_notify }
+        Timecop.freeze('11:30'.to_time) do
+          expect_no_notification(:game_status) { do_notify }
+        end
+      end
+
+      context 'notification already there' do
+        before do
+          Notification.create game: game, what: :game_status, sent_at: 24.hours.ago
+        end
+
+        it 'sends final email once' do
+          expect_email(/Game on/)
+          Timecop.freeze('11:00'.to_time) do
+            expect_notification(:game_status) { do_notify }
+          end
+          Timecop.freeze('11:30'.to_time) do
+            expect_no_notification(:game_status) { do_notify }
+          end
+        end
       end
     end
   end
