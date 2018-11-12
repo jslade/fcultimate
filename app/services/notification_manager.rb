@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NotificationManager
+class NotificationManager < ApplicationService
   attr_reader :game
 
   def initialize(game)
@@ -50,8 +50,18 @@ class NotificationManager
 
     now = Time.zone.now
     if now >= notify_time.to_time
-      unless already_sent_notification what, notify_time
-        sent = yield
+      trace('Time arrived for notification', game: game.name, what: what, notify_tyime: notify_time)
+      if already_sent_notification what, notify_time
+        trace('Already sent notification',
+          game: game.name, what: what, notify_time: notify_time
+        )
+      else
+        sent = trace('Time arrived for notification email',
+          game: game.name, what: what, notify_time: notify_time
+        ) do |trace_tags|
+          sent = yield
+          trace_tags[:sent] = sent
+        end
         notification_for(what).update sent_at: now if sent
       end
       return true
