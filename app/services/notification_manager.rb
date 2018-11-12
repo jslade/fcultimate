@@ -8,20 +8,22 @@ class NotificationManager < ApplicationService
   end
 
   def send_next_notification
-    Time.use_zone(game.timezone) do
-      send_next_notification_localtime
+    trace('send_next_notification', game: game.name) do
+      Time.use_zone(game.timezone) do
+        send_next_notification_localtime
+      end
     end
   end
 
   private
 
-  def send_next_notification_localtime
+  traced_method def send_next_notification_localtime
     notify_final_game_status ||
       notify_early_game_status ||
       notify_game_day
   end
 
-  def notify_final_game_status
+  traced_method def notify_final_game_status
     notify_if_time_arrived :game_status, game.email_time do
       if game.on?
         mailer.game_on(game).deliver
@@ -31,19 +33,19 @@ class NotificationManager < ApplicationService
     end
   end
 
-  def notify_early_game_status
+  traced_method def notify_early_game_status
     notify_if_time_arrived :need_more, game.early_email_time do
       mailer.need_more(game).deliver if game.need_more?
     end
   end
 
-  def notify_game_day
+  traced_method def notify_game_day
     notify_if_time_arrived :game_day, game.game_day_time do
       mailer.game_day(game).deliver if game.game_day?
     end
   end
 
-  def notify_if_time_arrived(what, notify_time)
+  traced_method def notify_if_time_arrived(what, notify_time)
     # If no notify time, it means this game is not configured for these
     # notifications, so consider it as sent
     return true unless notify_time.present?
