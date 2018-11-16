@@ -52,7 +52,7 @@ class NotificationManager < ApplicationService
 
     now = Time.zone.now
     if now >= notify_time.to_time
-      trace('Time arrived for notification', game: game.name, what: what, notify_tyime: notify_time)
+      trace('Time arrived for notification', game: game.name, what: what, notify_tyime: notify_time, now: now)
       if already_sent_notification what, notify_time
         trace('Already sent notification',
           game: game.name, what: what, notify_time: notify_time
