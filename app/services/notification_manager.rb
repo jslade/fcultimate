@@ -45,21 +45,28 @@ class NotificationManager < ApplicationService
     end
   end
 
-  traced_method def notify_if_time_arrived(what, notify_time)
+  traced_method def notify_if_time_arrived(what, notify_at)
     # If no notify time, it means this game is not configured for these
     # notifications, so consider it as sent
-    return true unless notify_time.present?
+    return true unless notify_at.present?
 
+    notify_time = notify_at.to_time
     now = Time.zone.now
-    if now >= notify_time.to_time
-      trace('Time arrived for notification', game: game.name, what: what, notify_tyime: notify_time, now: now)
+
+    if now >= notify_time
+      trace('Time arrived for notification',
+        game: game.name, what: what, notify_at: notify_at,
+        notify_time: notify_time, now: now
+      )
       if already_sent_notification what, notify_time
         trace('Already sent notification',
-          game: game.name, what: what, notify_time: notify_time
+          game: game.name, what: what, notify_at: notify_at,
+          notify_time: notify_time, now: now
         )
       else
         sent = trace('Time arrived for notification email',
-          game: game.name, what: what, notify_time: notify_time
+          game: game.name, what: what, notify_at: notify_at,
+          notify_time: notify_time, now: now
         ) do |trace_tags|
           sent = yield
           trace_tags[:sent] = sent
