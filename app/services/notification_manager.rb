@@ -50,7 +50,7 @@ class NotificationManager < ApplicationService
     # notifications, so consider it as sent
     return true unless notify_at.present?
 
-    notify_time = notify_at.to_time
+    notify_time = Time.zone.parse(notify_at)
     now = Time.zone.now
 
     if now >= notify_time
