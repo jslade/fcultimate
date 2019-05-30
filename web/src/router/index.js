@@ -18,6 +18,7 @@ export default function router() {
       <PageLayout>
         <Route exact path="/" component={Home} />
         <Switch>
+          <Route exact path="/index.html" component={Home} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/about" component={About} />
           <Route path="/:name" component={Game} />
