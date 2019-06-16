@@ -13,6 +13,8 @@ import GameUnsubscribe from './unsubscription'
 
 import API from '../../services/api'
 
+const REFRESH_INTERVAL = 10 * 60 * 1000
+
 export default class Game extends Component {
   constructor() {
     super()
@@ -27,6 +29,19 @@ export default class Game extends Component {
     this.loadGame()
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  resetRefresh = () => {
+    clearInterval(this.interval)
+    this.interval = setInterval(() => this.onRefresh(), REFRESH_INTERVAL)
+  }
+
+  onRefresh = () => {
+    this.loadGame()
+  }
+
   loadGame = () => {
     const { match } = this.props
     this.state.api
@@ -36,6 +51,7 @@ export default class Game extends Component {
 
   handleResponse = json => {
     this.setState({ loaded: true, game: json })
+    this.resetRefresh()
   }
 
   onSubmit = signup => {
