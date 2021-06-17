@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby '2.4.1'
+ruby '2.7.3'
 
 source 'https://rubygems.org'
 
@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.5'
 
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
-gem 'devise', '> 4.x'
+gem 'devise', '>= 4.8.x'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 
 # Misc
