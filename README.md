@@ -74,6 +74,21 @@ user must be seeded manually...
 
 `fcultimate.net` is hosted by [Heroku](heroku.com) on a free-dev plan.
 
+Deploy by pushing to the heroku remote
+
+```bash
+git push heroku master
+```
+
+Do the normal rails admin kinds of things via `heroku run`
+
+```bash
+heroku run bundle exec rails c
+heroku run bundle exec rails db:migrate
+```
+
+Probably need to `heroku login` first.
+
 #### Sendgrid add-on
 
 ```bash
