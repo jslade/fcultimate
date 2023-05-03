@@ -2,7 +2,7 @@
   "name": "fcultimate-web",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://api:3000",
   "dependencies": {
     "react": "^16.0.0",
     "react-bootstrap": "^0.32.4",

@@ -7,7 +7,9 @@ module Responders
     def api_behavior
       raise MissingRenderer, format unless has_renderer?
 
-      if get?
+      if !resource
+        head :no_content
+      elsif get?
         display resource
       elsif post?
         display resource, status: :created, location: api_location

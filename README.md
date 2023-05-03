@@ -64,6 +64,14 @@ area I'm still pretty weak at, so it is not all very clean yet.
 
 ## Development
 
+Local development is done with docker / `docker-compose`. The `docker-compose.yml` provides
+the `web` service listening on port 3000, talking to the `api` service that listens on port 3001.
+
+```
+docker-compose build
+docker-compose up
+```
+
 ## Deployment
 
 There are no credentials stored in the code. The only credentials currently
@@ -71,35 +79,6 @@ required for using the app are for the admin interface, and the initial admin
 user must be seeded manually...
 
 ### fcultimate.net
-
-`fcultimate.net` is hosted by [Heroku](heroku.com) on a free-dev plan.
-
-Deploy by pushing to the heroku remote
-
-```bash
-git push heroku master
-```
-
-Do the normal rails admin kinds of things via `heroku run`
-
-```bash
-heroku run bundle exec rails c
-heroku run bundle exec rails db:migrate
-```
-
-Probably need to `heroku login` first.
-
-#### Sendgrid add-on
-
-```bash
-heroku addons:create sendgrid:starter
-```
-
-#### Scheduler add-on
-
-```bash
-heroku addons:create scheduler:standard
-```
 
 ## White-label / Embedding
 

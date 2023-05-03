@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20181026165028) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -55,9 +58,9 @@ ActiveRecord::Schema.define(version: 20181026165028) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.text "brief"
-    t.text "description", default: ""
-    t.text "location", default: ""
+    t.string "brief"
+    t.text "description"
+    t.text "location"
     t.string "game_days"
     t.string "game_day_time"
     t.string "game_time"
@@ -67,19 +70,19 @@ ActiveRecord::Schema.define(version: 20181026165028) do
     t.integer "min_team_size", default: 3
     t.integer "status", default: 0
     t.string "notify_address"
-    t.text "subscribe_url"
-    t.text "unsubscribe_url"
+    t.string "subscribe_url"
+    t.string "unsubscribe_url"
     t.integer "max_team_size", default: 7
     t.integer "curr_team_size", default: 0
     t.string "timezone"
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "game_id", limit: 8, null: false
+    t.bigint "game_id", null: false
     t.string "what", null: false
-    t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "sent_at"
   end
 
   create_table "players", force: :cascade do |t|
@@ -98,4 +101,7 @@ ActiveRecord::Schema.define(version: 20181026165028) do
     t.text "comment"
   end
 
+  add_foreign_key "players", "games"
+  add_foreign_key "signups", "games"
+  add_foreign_key "signups", "players"
 end

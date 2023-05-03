@@ -8,7 +8,7 @@ export default class Content extends Component {
     super()
     this.api = new API()
     this.state = {
-      markdown: '... missing content ...'
+      markdown: this.renderMissing()
     }
   }
 
@@ -38,7 +38,11 @@ export default class Content extends Component {
   }
 
   prepMarkdown = (body) => {
-    return body
+    return body ? "" + body : this.renderMissing()
+  }
+
+  renderMissing () {
+    return this.props ? `... missing content for ${this.props.name} ...` : "...";
   }
 
   render () {

@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import About from '../components/about'
+import Admin from '../components/admin'
 import Contact from '../components/contact'
 import Game from '../components/game'
 import Home from '../components/home'
@@ -21,6 +22,7 @@ export default function router() {
           <Route exact path="/index.html" component={Home} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/admin" component={Admin} />
           <Route path="/:name" component={Game} />
 
           <Route
