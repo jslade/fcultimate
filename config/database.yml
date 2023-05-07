@@ -6,9 +6,9 @@
 #
 default: &default
   adapter: postgresql
-  host: postgresql
-  username: fcultimate
-  password: fcultimate
+  host: <%= ENV.fetch("RAILS_DB_HOSTNAME") { "postgresql" } %>
+  username: <%= ENV.fetch("RAILS_DB_USERNAME") { "fcultimate" } %>
+  password: <%= ENV.fetch("RAILS_DB_PASSWORD") { "fcultimate" } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
