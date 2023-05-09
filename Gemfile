@@ -23,9 +23,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # ActiveAdmin
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '~> 2.3.1'
+gem 'actioncable'
 gem 'devise', '>= 4.8.x'
-gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
+gem 'inherited_resources'
 
 # Misc
 gem 'active_model_serializers'
