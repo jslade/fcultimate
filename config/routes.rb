@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :subscriptions, only: [:create]
     end
 
+    get 'notifications/send-next', to: 'notifications#send_next'
+
     get 'contents/:name', to: 'contents#show', constraints: { name: %r{[^/?]+} }
   end
 

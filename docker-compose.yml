@@ -5,8 +5,9 @@ services:
     build:
       context: .
     environment:
-      - RAILS_ENV=${RAILS_ENV}
-      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - RAILS_ENV=development
+      - SECRET_KEY_BASE=.
+      - API_KEY=whatever
     ports:
       - 4001:3000
     volumes:

@@ -16,5 +16,6 @@ ActiveAdmin.register Game do
     :notify_address,
     :signup_time,
     :subscribe_url,
-    :unsubscribe_url
+    :unsubscribe_url,
+    :timezone
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
+  include Traceable
+
   responders :json
   respond_to :json
   layout false
