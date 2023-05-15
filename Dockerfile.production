@@ -18,6 +18,8 @@ RUN gem install bundler
 RUN bundle update --bundler
 RUN bundle install --without development --without test
 RUN bundle exec yarn install
+RUN bundle exec yarn build
+RUN bundle exec yarn deploy
 
 # This is just needed for asset compilation -- it's okay that it is in the source
 ENV SECRET_KEY_BASE=a22302b6b65eb0291b31f25a3457f9fc131fe73cf2c9926dd1de3679ad7732c33c4d3691b9710e1225d0ab77540954315575a4ceb8f843ed51c8189bc998dd4e
