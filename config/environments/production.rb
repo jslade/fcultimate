@@ -28,7 +28,9 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  #config.assets.compile = false
+  config.assets.compile = true
+  config.serve_static_assets = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
@@ -91,19 +93,17 @@ Rails.application.configure do
 
   config.secret_key = ENV['SECRET_KEY_BASE']
 
-  # TODO: This is intended for using the sendgrid addon when deployed to Heroku.
   # This should be generalized at some point to work for other deployments
-  if ENV['SENDGRID_USERNAME']
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.smtp_settings = {
-      :user_name => ENV['SENDGRID_USERNAME'],
-      :password => ENV['SENDGRID_PASSWORD'],
-      :domain => ENV['MAIL_HOST'],
-      :address => ENV['SENDGRID_ADDRESS'],
-      :port => 587,
-      :authentication => :plain,
-      :enable_starttls_auto => true
-    }
-  end
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :user_name => ENV['SMTP_USERNAME'],
+    :password => ENV['SMTP_PASSWORD'],
+    :domain => ENV['HOST'],
+    :address => ENV['SMTP_ADDRESS'],
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+end
 end

@@ -1,0 +1,28 @@
+FROM ruby:2.7.6
+
+ENV RAILS_ENV=production
+
+# https://yarnpkg.com/lang/en/docs/install/#debian-stable
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+ && echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+ && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+ && apt-get update -qq \
+ && apt-get install -y nodejs yarn vim
+
+ENV APP_ROOT /app
+COPY . $APP_ROOT
+WORKDIR $APP_ROOT
+
+ENV BUNDLE_PATH /app/vendor/bundle
+RUN gem install bundler
+RUN bundle update --bundler
+RUN bundle install --without development --without test
+RUN bundle exec yarn install
+
+# This is just needed for asset compilation -- it's okay that it is in the source
+ENV SECRET_KEY_BASE=a22302b6b65eb0291b31f25a3457f9fc131fe73cf2c9926dd1de3679ad7732c33c4d3691b9710e1225d0ab77540954315575a4ceb8f843ed51c8189bc998dd4e
+
+RUN bundle exec rails assets:precompile
+
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+EXPOSE 3000

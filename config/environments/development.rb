@@ -53,5 +53,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   ENV['MAILER_FROM'] ||= 'dev@fcultimate.net'
-  ENV['MAILER_HOST'] ||= 'fcultimate.net'
+  ENV['HOST'] ||= 'fcultimate.net'
 end

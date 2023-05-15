@@ -42,5 +42,5 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :test
   ENV['MAILER_FROM'] ||= 'test@fcultimate.net'
-  ENV['MAILER_HOST'] ||= 'fcultimate.net'
+  ENV['HOST'] ||= 'fcultimate.net'
 end
