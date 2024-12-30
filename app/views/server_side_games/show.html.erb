@@ -1,0 +1,4 @@
+<h1><%= @game.name %></h1>
+<div id="description">
+    <%= @markdown.render(@game.description).html_safe %>
+</div>

@@ -35,6 +35,7 @@ gem 'mini_racer', platforms: :ruby
 gem 'responders'
 gem 'scout_apm'
 gem 'traceable'
+gem "redcarpet", "~> 3.6"
 
 # Sprockets -- need this specific version for security vulnerability
 gem 'sprockets', '~> 3.7.2'
@@ -79,3 +80,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+

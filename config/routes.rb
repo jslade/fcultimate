@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get 'contents/:name', to: 'contents#show', constraints: { name: %r{[^/?]+} }
   end
 
+  get '/:game_id', to: 'server_side_games#show'
+
   # This is needed for compatibility with react-router on the frontend, so none
   # of its routes get processed by rails, but rather everything gets processed
   # through the public/index_html
