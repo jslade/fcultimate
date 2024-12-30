@@ -25,6 +25,7 @@ class NotificationManager < ApplicationService
 
   traced_method def notify_final_game_status
     notify_if_time_arrived :game_status, game.email_time do
+      trace("Sending game_status email for #{game.name}")
       if game.on?
         mailer.game_on(game).deliver
       elsif game.need_more?
@@ -35,12 +36,14 @@ class NotificationManager < ApplicationService
 
   traced_method def notify_early_game_status
     notify_if_time_arrived :need_more, game.early_email_time do
+      trace("Sending need_more email for #{game.name}")
       mailer.need_more(game).deliver if game.need_more?
     end
   end
 
   traced_method def notify_game_day
     notify_if_time_arrived :game_day, game.game_day_time do
+      trace("Sending game_day email for #{game.name}")
       mailer.game_day(game).deliver if game.game_day?
     end
   end
