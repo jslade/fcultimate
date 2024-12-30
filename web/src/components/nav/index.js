@@ -22,6 +22,7 @@ export default class Nav extends Component {
         <Navbar.Collapse>
           <NavGroup activeHref={window.location.pathname}>
             <NavItem href="/hpnc" onClick={this.onClick}>HP Mon/Thu pickup</NavItem>
+            <NavItem href="/saturday" onClick={this.onClick}>Saturday AM pickup</NavItem>
             <NavItem href="/hp_fri_soccer" onClick={this.onClick}>Fri soccer</NavItem>
           </NavGroup>
           <NavGroup activeHref={window.location.pathname} pullRight>
