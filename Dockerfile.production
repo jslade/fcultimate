@@ -14,7 +14,7 @@ COPY . $APP_ROOT
 WORKDIR $APP_ROOT
 
 ENV BUNDLE_PATH /app/vendor/bundle
-RUN gem install bundler
+RUN gem install bundler -v 2.4.22
 RUN bundle update --bundler
 RUN bundle install --without development --without test
 RUN bundle exec yarn install
